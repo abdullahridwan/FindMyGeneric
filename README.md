@@ -7,4 +7,4 @@ Finds generic name for any brand name medication using openFDA API
 * Using FDA data and information, the goal is to provide the generic names for any brand name medication. 
 * Below is an example for Advil
 
-![alt text](https://github.com/abdullahridwan/FindMyGeneric/Shared/IMAGES/blob/origin/advil.png?raw=true)
+![alt text](https://github.com/abdullahridwan/FindMyGeneric/Shared/IMAGES/blob/origin/Simulator Screen Shot - iPhone 12 - 2021-06-13 at 23.31.32.png?raw=true)
