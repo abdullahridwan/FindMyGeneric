@@ -31,20 +31,31 @@ struct CompleteLoad: Codable, Identifiable {
 class API {
     func getPosts(item: String, completion: @escaping(CompleteLoad) -> ()){
         //will change later
-        print("Getting Posts...")
-        //let item = "Advil"
-        let queryString = "https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:\(item)&count=openfda.generic_name.exact"
+        print("Getting Posts... \(item)")
+        let trimmed = item.trimmingCharacters(in: .whitespacesAndNewlines)
+        let queryString = "https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:\(trimmed)&count=openfda.generic_name.exact"
         let url = URL(string: queryString)
-        URLSession.shared.dataTask(with: url!) { jsonData, error, _ in
-            if (error == nil) {
-                let completeLoad = try! JSONDecoder().decode(CompleteLoad.self, from: jsonData!)
-                print("[DataModel.swift] Complete Load:  \(completeLoad)")
-                DispatchQueue.main.async{
-                    completion(completeLoad)
-                }
+            //URLSession.shared.dataTask(
+        if url != nil{
+            URLSession.shared.dataTask(with: url!) { jsonData, urlresponse, error in
+                
+                
+                //if status code is 200, proce
+                if let httpResponse = urlresponse as? HTTPURLResponse {
+                        print("statusCode: \(httpResponse.statusCode)")
+                        if(httpResponse.statusCode == 200){
+                            print("Getting data...")
+                            let completeLoad = try! JSONDecoder().decode(CompleteLoad.self, from: jsonData!)
+                            print("[DataModel.swift] Complete Load:  \(completeLoad)")
+                            DispatchQueue.main.async{
+                                completion(completeLoad)
+                            }
+                        }
+                    }
+                
             }
+            .resume()
         }
-        .resume()
     }
 }
 

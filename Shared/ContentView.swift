@@ -33,8 +33,7 @@ struct ContentView: View {
             }
         }
         .onChange(of: brandMedicationName, perform: { value in
-            
-            API().getPosts(item: brandMedicationName){ completeLoadFromApi in
+            API().getPosts(item: value){ completeLoadFromApi in
                 print(completeLoadFromApi)
                 self.completeLoadFromApi = completeLoadFromApi
             }
