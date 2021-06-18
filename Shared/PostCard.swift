@@ -15,7 +15,7 @@ struct PostCard: View {
             Image(systemName: "pills").foregroundColor(.red)
             VStack(alignment: .leading){
                 Text(post.term.lowercased())
-                //Text("Total Number of Times Mentioned: \(post.count)").font(.subheadline)
+                Text("Total Number of Records: \(post.count)").font(.subheadline)
             }
             Spacer()
         }

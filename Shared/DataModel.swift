@@ -29,17 +29,19 @@ struct CompleteLoad: Codable, Identifiable {
 }
 
 class API {
-    func getPosts(completion: @escaping(CompleteLoad) -> ()){
+    func getPosts(item: String, completion: @escaping(CompleteLoad) -> ()){
         //will change later
         print("Getting Posts...")
-        let item = "Advil"
+        //let item = "Advil"
         let queryString = "https://api.fda.gov/drug/drugsfda.json?search=openfda.brand_name:\(item)&count=openfda.generic_name.exact"
         let url = URL(string: queryString)
-        URLSession.shared.dataTask(with: url!) { jsonData, _, _ in
-            let completeLoad = try! JSONDecoder().decode(CompleteLoad.self, from: jsonData!)
-            print("[DataModel.swift] Complete Load:  \(completeLoad)")
-            DispatchQueue.main.async{
-                completion(completeLoad)
+        URLSession.shared.dataTask(with: url!) { jsonData, error, _ in
+            if (error == nil) {
+                let completeLoad = try! JSONDecoder().decode(CompleteLoad.self, from: jsonData!)
+                print("[DataModel.swift] Complete Load:  \(completeLoad)")
+                DispatchQueue.main.async{
+                    completion(completeLoad)
+                }
             }
         }
         .resume()
