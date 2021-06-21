@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State var completeLoadFromApi = CompleteLoad(meta: Meta(disclaimer: "none", terms: "non", license: "none", last_updated: "none") , results: [Post(term: "0", count: 0)])
-    
     @State var brandMedicationName: String = "Advil"
+    @State var showingDisclaimerAlert: Bool = false
     
     var body: some View {
         
@@ -36,10 +36,12 @@ struct ContentView: View {
             API().getPosts(item: value){ completeLoadFromApi in
                 print(completeLoadFromApi)
                 self.completeLoadFromApi = completeLoadFromApi
+                showingDisclaimerAlert.toggle()
             }
-            
-            
         })
+        .alert(isPresented: $showingDisclaimerAlert){
+            Alert(title: Text("Disclaimer: This should not be used as a medical tool. Please consult your doctor for medical decisions."), dismissButton: .default(Text("OK")))
+        }
 
             
     }
