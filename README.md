@@ -1,5 +1,5 @@
 # FindMyGeneric
-Finds generic name for any brand name medication using openFDA API.
+Finds generic name for any brand name medication using openFDA API
 * Many generic medications are far less than their brand name counter parts. 
 * A patient should consult with their physician about their medical needs. 
 * Using FDA data, the goal is to provide the generic names for any brand name medication. 
